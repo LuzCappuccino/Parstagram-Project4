@@ -1,16 +1,24 @@
 package com.example.luzcamacho.parstagram;
 
-import android.support.v7.app.AppCompatActivity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
+
+import com.parse.LogInCallback;
+import com.parse.ParseException;
+import com.parse.ParseUser;
 
 public class MainActivity extends AppCompatActivity {
 
     private EditText etUsername;
     private EditText etPassword;
     private Button btLogin;
+    public String tag = "LoginActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,12 +32,34 @@ public class MainActivity extends AppCompatActivity {
         btLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                final String username = etUsername.getText().toString();
+                final String password = etPassword.getText().toString();
+                login(username, password);
             }
         });
     }
 
-    private void login(String username, String Password) {
+    private void login(String username, String password) {
         // TODO: actually implement things that allow me to login
+        /* set up parse config */
+        ParseUser.logInInBackground(username, password, new LogInCallback() {
+            @Override
+            public void done(ParseUser user, ParseException e) {
+                if(e == null){
+                    Log.d(tag, "User was logged in successfully");
+                    Toast.makeText(getApplicationContext(), "User was logged in successfully", Toast.LENGTH_LONG).show();
+                    // since we are in a callback we wanna make sure we do maincativity.this
+                    Intent data = new Intent(MainActivity.this, HomeActivity.class);
+                    startActivity(data);
+                    // so the user can't back out into login screen
+                    finish();
+                }
+                else{
+                    Log.e(tag, "Login failure");
+                    Toast.makeText(getApplicationContext(), "User was not logged in", Toast.LENGTH_LONG).show();
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 }
