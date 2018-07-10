@@ -18,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText etUsername;
     private EditText etPassword;
     private Button btLogin;
+    private Button btSignUp;
     public String tag = "LoginActivity";
 
     @Override
@@ -28,6 +29,21 @@ public class MainActivity extends AppCompatActivity {
         etUsername = (EditText) findViewById(R.id.etUsername);
         etPassword = (EditText) findViewById(R.id.etPassword);
         btLogin = (Button) findViewById(R.id.btLogin);
+        btSignUp = (Button) findViewById(R.id.btSignUp);
+
+        if(ParseUser.getCurrentUser() != null){
+            Log.d(tag, "there is a user in here somewhere");
+            /* time to log in background */
+            Log.d(tag, "Username: " + ParseUser.getCurrentUser().getUsername());
+
+            Intent data = new Intent(MainActivity.this, HomeActivity.class);
+            startActivity(data);
+            // so the user can't back out into login screen
+            finish();
+        }
+        else{
+            Log.d(tag, "User is null");
+        }
 
         btLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -37,10 +53,19 @@ public class MainActivity extends AppCompatActivity {
                 login(username, password);
             }
         });
+
+        btSignUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), SignUpActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
     }
 
     private void login(String username, String password) {
-        // TODO: actually implement things that allow me to login
         /* set up parse config */
         ParseUser.logInInBackground(username, password, new LogInCallback() {
             @Override
