@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/BigView"
+    tools:context="com.example.luzcamacho.parstagram.CameraActivity">
+
+    <ImageView
+        android:id="@+id/ivPreview"
+        android:layout_width="300dp"
+        android:layout_height="250dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        app:srcCompat="@android:color/black" />
+
+    <Button
+        android:id="@+id/btSubmit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentStart="true"
+        android:text="Submit" />
+
+    <EditText
+        android:id="@+id/etSetCaption"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/ivPreview"
+        android:layout_marginTop="67dp"
+        android:ems="10"
+        android:hint="Caption This"
+        android:inputType="textMultiLine"
+        android:textAlignment="center" />
+
+</RelativeLayout>

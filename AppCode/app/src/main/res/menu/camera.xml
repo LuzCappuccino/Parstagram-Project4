@@ -4,6 +4,7 @@
     <item
         android:id="@+id/btCamera"
         android:title="camera"
+        android:onClick="onClickCamera"
         app:showAsAction="always" />
     <item
         android:id="@+id/btLogOut"

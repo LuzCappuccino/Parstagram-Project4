@@ -147,4 +147,11 @@ public class HomeActivity extends AppCompatActivity {
         startActivity(back);
         finish();
     }
+
+    public void onClickCamera(MenuItem item) {
+        /* time to launch the camera */
+        Log.d(tag, "Clicked on camera");
+        Intent goCamera = new Intent(getApplicationContext(), CameraActivity.class);
+        startActivity(goCamera);
+    }
 }
