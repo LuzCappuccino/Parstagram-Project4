@@ -16,6 +16,7 @@ public class Post extends ParseObject {
     private static final String KEY_DESCRIPTION = "description";
     private static final String KEY_IMAGE = "image";
     private static final String KEY_USER = "user";
+    private static final String KEY_DATE = "updatedAt";
 
     /* returns description for the post */
     public String getDescription() {
@@ -42,6 +43,8 @@ public class Post extends ParseObject {
         put(KEY_USER, user);
     }
 
+    public String getDate() { return ParseRelativeDate.getRelativeTimeAgo(getUpdatedAt().toString()); }
+
     public static class Query extends ParseQuery<Post>
     {
         public Query(){
@@ -49,6 +52,7 @@ public class Post extends ParseObject {
         }
 
         public Query getTop() {
+            orderByDescending("createdAt");
             setLimit(20);
             /* the builder pattern: allows user to chain methods */
             return this;
