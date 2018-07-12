@@ -1,12 +1,14 @@
 package com.example.luzcamacho.parstagram;
 
 import android.content.Intent;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.parse.ParseException;
@@ -21,6 +23,8 @@ public class SignUpActivity extends AppCompatActivity {
     private EditText Password;
     private Button SignUp;
 
+    private AnimationDrawable animationDrawable;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +36,12 @@ public class SignUpActivity extends AppCompatActivity {
         Email = findViewById(R.id.etSetEmail);
         Password = findViewById(R.id.etSetPassword);
         SignUp = findViewById(R.id.btSignUp);
+
+        /* start animation! */
+        RelativeLayout myThing = findViewById(R.id.rlSignUp);
+        animationDrawable = (AnimationDrawable) myThing.getBackground();
+        animationDrawable.setEnterFadeDuration(5000);
+        animationDrawable.setExitFadeDuration(2000);
 
         SignUp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,6 +58,12 @@ public class SignUpActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        animationDrawable.start();
     }
 
     public boolean SubmitUser(){
