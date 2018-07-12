@@ -12,4 +12,9 @@
         android:onClick="onClickLogout"
         app:showAsAction="always" />
 
+    <item android:id="@+id/btFeed"
+        android:title="Feed"
+        android:onClick="onClickFeed"
+        app:showAsAction="always" />
+
 </menu>

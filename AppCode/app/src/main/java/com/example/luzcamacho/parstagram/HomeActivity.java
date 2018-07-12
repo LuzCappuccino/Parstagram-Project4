@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.example.luzcamacho.parstagram.model.Post;
 import com.parse.FindCallback;
@@ -97,5 +98,10 @@ public class HomeActivity extends AppCompatActivity {
         Log.d(tag, "Clicked on camera");
         Intent goCamera = new Intent(getApplicationContext(), CameraActivity.class);
         startActivity(goCamera);
+    }
+
+    public void onClickFeed(MenuItem item) {
+        /* TODO: implement later with fragment */
+        Toast.makeText(getApplicationContext(), "You clicked on feed!", Toast.LENGTH_LONG).show();
     }
 }
