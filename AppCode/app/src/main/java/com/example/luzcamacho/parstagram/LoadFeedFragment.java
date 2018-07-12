@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -30,6 +31,8 @@ public class LoadFeedFragment extends Fragment {
     private static String tag = "LoadFeedFragment";
     /* will be used in place of context */
     private FragmentActivity fragAct;
+    // for swipe to refresh stuff
+    private SwipeRefreshLayout swipeContainer;
 
     public LoadFeedFragment() {
         // Required empty public constructor
@@ -53,27 +56,24 @@ public class LoadFeedFragment extends Fragment {
         rvPostViewer.setAdapter(instaAdapter);
         /* time to fetch and load posts into our rv */
         loadTopPosts();
+        /* swipe container time */
+        swipeContainer = (SwipeRefreshLayout) fragAct.findViewById(R.id.swipeContainer);
+        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                fetchTimelineAsync(0);
+                swipeContainer.setRefreshing(false);
+            }
+        });
     }
 
-//    @Override
-//    public void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        Log.d(tag, "In my load feed fragment");
-//        /* set up our  "context" */
-//        fragAct = (FragmentActivity) getActivity();
-//        /* set up our recycler view */
-//        rvPostViewer = fragAct.findViewById(R.id.rvFeed);
-//        /* init data set */
-//        myFeed = new ArrayList<>();
-//        /* construct adapter with data set */
-//        instaAdapter = new InstaAdapter(myFeed);
-//        /* recycler view set up (layout manager) */
-//        rvPostViewer.setLayoutManager(new LinearLayoutManager(fragAct));
-//        /* set the adapter */
-//        rvPostViewer.setAdapter(instaAdapter);
-//        /* time to fetch and load posts into our rv */
-//        loadTopPosts();
-//    }
+    private void fetchTimelineAsync(int i) {
+        /* make function call to fetch the thing again */
+        instaAdapter.clear();
+        loadTopPosts();
+        instaAdapter.addAll(myFeed);
+        /* hope this works?? */
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

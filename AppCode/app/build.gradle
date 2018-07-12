@@ -44,4 +44,7 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.7.1'
     // imports for action bar
     implementation "com.android.support:design:27.1.1"
+    // for parcel
+    implementation 'org.parceler:parceler-api:1.1.6'
+    annotationProcessor 'org.parceler:parceler:1.1.6'
 }

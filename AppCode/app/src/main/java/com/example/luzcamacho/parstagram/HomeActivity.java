@@ -20,12 +20,15 @@ public class HomeActivity extends AppCompatActivity {
 
     final Fragment fragmentCamera = new CameraLaunchFragment();
     final Fragment fragmentFeed = new LoadFeedFragment();
+    public FragmentManager fragmentManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        final FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager = getSupportFragmentManager();
+
+        switchToFeed();
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
 
@@ -76,6 +79,11 @@ public class HomeActivity extends AppCompatActivity {
         Intent back = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(back);
         finish();
+    }
+
+    public void switchToFeed(){
+        FragmentTransaction fragmentTransaction2 = fragmentManager.beginTransaction();
+        fragmentTransaction2.replace(R.id.BigFrameBoi, fragmentFeed).commit();
     }
 //
 //    public void onClickCamera(MenuItem item) {

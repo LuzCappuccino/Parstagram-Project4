@@ -11,7 +11,6 @@ import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.FileProvider;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -20,6 +19,12 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+
+import com.example.luzcamacho.parstagram.model.Post;
+import com.parse.ParseException;
+import com.parse.ParseFile;
+import com.parse.ParseUser;
+import com.parse.SaveCallback;
 
 import java.io.File;
 
@@ -38,7 +43,8 @@ public class CameraLaunchFragment extends Fragment {
     /* loading views */
     public Button btSubmitPost;
     public EditText etEnterCaption;
-    private FragmentActivity fragAct;
+    /* used as our context    n l,ll,e*/
+    private HomeActivity fragAct;
 
     public CameraLaunchFragment() {
         // Required empty public constructor
@@ -48,24 +54,20 @@ public class CameraLaunchFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         Log.d(APP_TAG, "Starting my camera fragment");
-        fragAct = (FragmentActivity) getActivity();
+        fragAct = (HomeActivity) getActivity();
         View PicPreview = fragAct.findViewById(R.id.BigFragView);
         btSubmitPost = fragAct.findViewById(R.id.btSubmitPost);
         etEnterCaption = fragAct.findViewById(R.id.etEnterCaption);
         onLaunchCamera(PicPreview);
-    }
+        /* setting on click listener */
+        btSubmitPost.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                submitPost();
+            }
 
-//    @Override
-//    public void onCreate(@Nullable Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        /* set up our views */
-//        Log.d(APP_TAG, "Starting my camera fragment");
-//        fragAct = (FragmentActivity) getActivity();
-//        View PicPreview = fragAct.findViewById(R.id.BigFragView);
-//        btSubmitPost = btSubmitPost.findViewById(R.id.btSubmitPost);
-//        etEnterCaption = etEnterCaption.findViewById(R.id.etEnterCaption);
-//        onLaunchCamera(PicPreview);
-//    }
+        });
+    }
 
     private void onLaunchCamera(View picPreview) {
         /* create Intent to take a picture and return control to the calling application */
@@ -122,6 +124,44 @@ public class CameraLaunchFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_camera_launch, container, false);
+    }
+
+    public void submitPost(){
+        final String description = etEnterCaption.getText().toString();
+        Log.d(APP_TAG, "Description: " + description);
+        final ParseFile file = new ParseFile(getPhotoFileUri(photoFileName));
+        final ParseUser user = ParseUser.getCurrentUser();
+        Log.d(APP_TAG, "Username: " + user.getUsername());
+        /* time to create our Poster boi */
+        file.saveInBackground(new SaveCallback() {
+            @Override
+            public void done(ParseException e) {
+                if(e == null){
+                    Post newPost = new Post();
+                    newPost.setUser(user);
+                    newPost.setImage(file);
+                    newPost.setDescription(description);
+                    newPost.saveInBackground(new SaveCallback() {
+                        @Override
+                        public void done(ParseException e) {
+                            if(e == null){
+                                // wait for submission, go to feed
+                                Log.d(APP_TAG, "submission done");
+                                fragAct.switchToFeed();
+                            }
+                            else{
+                                // post toast, still go to feed
+                                e.printStackTrace();
+//                                fragAct.switchToFeed();
+                            }
+                        }
+                    });
+                } else{
+                    /* if the image fails to encode */
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 
 }

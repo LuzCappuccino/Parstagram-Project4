@@ -1,6 +1,7 @@
 package com.example.luzcamacho.parstagram;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,6 +12,8 @@ import android.widget.TextView;
 
 import com.example.luzcamacho.parstagram.model.GlideApp;
 import com.example.luzcamacho.parstagram.model.Post;
+
+import org.parceler.Parcels;
 
 import java.util.ArrayList;
 
@@ -68,7 +71,7 @@ public class InstaAdapter extends RecyclerView.Adapter<InstaAdapter.ViewHolder> 
         notifyDataSetChanged();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public ImageView Pic;
         public TextView Username;
         public TextView Caption;
@@ -81,6 +84,25 @@ public class InstaAdapter extends RecyclerView.Adapter<InstaAdapter.ViewHolder> 
             Username = itemView.findViewById(R.id.tvUserInfo);
             Caption = itemView.findViewById(R.id.tvCaption);
             Date = itemView.findViewById(R.id.tvDate);
+
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+            int position = getAdapterPosition();
+            if(position != RecyclerView.NO_POSITION){
+                Post post = myFeed.get(position);
+                /* initialize the new intent */
+                Intent intent = new Intent(context, PostDetailsActivity.class);
+                intent.putExtra(Post.class.getSimpleName(), Parcels.wrap(post));
+                /* start activity with created intent */
+                context.startActivity(intent);
+            }
         }
     }
+
+
+
+
 }
