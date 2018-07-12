@@ -2,6 +2,7 @@ package com.example.luzcamacho.parstagram;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -25,6 +26,8 @@ public class LoadFeedFragment extends Fragment {
     private InstaAdapter instaAdapter;
     /* our standard tag */
     private static String tag = "LoadFeedFragment";
+    /* will be used in place of context */
+    private FragmentActivity fragAct;
 
     public LoadFeedFragment() {
         // Required empty public constructor
@@ -33,6 +36,8 @@ public class LoadFeedFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        /* set up our  "context" */
+        fragAct = (FragmentActivity) getActivity();
         /* set up our recycler view */
         rvPostViewer = rvPostViewer.findViewById(R.id.rvFeed);
         /* init data set */
@@ -40,7 +45,7 @@ public class LoadFeedFragment extends Fragment {
         /* construct adapter with data set */
         instaAdapter = new InstaAdapter(myFeed);
         /* recycler view set up (layout manager) */
-        rvPostViewer.setLayoutManager(new LinearLayoutManager(getContext()));
+        rvPostViewer.setLayoutManager(new LinearLayoutManager(fragAct));
         /* set the adapter */
         rvPostViewer.setAdapter(instaAdapter);
         /* time to fetch and load posts into our rv */
