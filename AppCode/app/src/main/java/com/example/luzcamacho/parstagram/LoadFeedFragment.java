@@ -1,6 +1,8 @@
 package com.example.luzcamacho.parstagram;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -34,12 +36,13 @@ public class LoadFeedFragment extends Fragment {
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        Log.d(tag, "In my load feed fragment");
         /* set up our  "context" */
         fragAct = (FragmentActivity) getActivity();
         /* set up our recycler view */
-        rvPostViewer = rvPostViewer.findViewById(R.id.rvFeed);
+        rvPostViewer = fragAct.findViewById(R.id.rvFeed);
         /* init data set */
         myFeed = new ArrayList<>();
         /* construct adapter with data set */
@@ -51,6 +54,26 @@ public class LoadFeedFragment extends Fragment {
         /* time to fetch and load posts into our rv */
         loadTopPosts();
     }
+
+//    @Override
+//    public void onCreate(Bundle savedInstanceState) {
+//        super.onCreate(savedInstanceState);
+//        Log.d(tag, "In my load feed fragment");
+//        /* set up our  "context" */
+//        fragAct = (FragmentActivity) getActivity();
+//        /* set up our recycler view */
+//        rvPostViewer = fragAct.findViewById(R.id.rvFeed);
+//        /* init data set */
+//        myFeed = new ArrayList<>();
+//        /* construct adapter with data set */
+//        instaAdapter = new InstaAdapter(myFeed);
+//        /* recycler view set up (layout manager) */
+//        rvPostViewer.setLayoutManager(new LinearLayoutManager(fragAct));
+//        /* set the adapter */
+//        rvPostViewer.setAdapter(instaAdapter);
+//        /* time to fetch and load posts into our rv */
+//        loadTopPosts();
+//    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

@@ -4,17 +4,14 @@
     <item
         android:id="@+id/btCamera"
         android:title="camera"
-        android:onClick="onClickCamera"
         app:showAsAction="always" />
     <item
         android:id="@+id/btLogOut"
         android:title="logout"
-        android:onClick="onClickLogout"
         app:showAsAction="always" />
 
     <item android:id="@+id/btFeed"
         android:title="Feed"
-        android:onClick="onClickFeed"
         app:showAsAction="always" />
 
 </menu>

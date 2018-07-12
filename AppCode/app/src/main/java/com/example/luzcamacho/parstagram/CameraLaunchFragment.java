@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -44,15 +45,27 @@ public class CameraLaunchFragment extends Fragment {
     }
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        /* set up our views */
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        Log.d(APP_TAG, "Starting my camera fragment");
         fragAct = (FragmentActivity) getActivity();
         View PicPreview = fragAct.findViewById(R.id.BigFragView);
-        btSubmitPost = btSubmitPost.findViewById(R.id.btSubmitPost);
-        etEnterCaption = etEnterCaption.findViewById(R.id.etEnterCaption);
+        btSubmitPost = fragAct.findViewById(R.id.btSubmitPost);
+        etEnterCaption = fragAct.findViewById(R.id.etEnterCaption);
         onLaunchCamera(PicPreview);
     }
+
+//    @Override
+//    public void onCreate(@Nullable Bundle savedInstanceState) {
+//        super.onCreate(savedInstanceState);
+//        /* set up our views */
+//        Log.d(APP_TAG, "Starting my camera fragment");
+//        fragAct = (FragmentActivity) getActivity();
+//        View PicPreview = fragAct.findViewById(R.id.BigFragView);
+//        btSubmitPost = btSubmitPost.findViewById(R.id.btSubmitPost);
+//        etEnterCaption = etEnterCaption.findViewById(R.id.etEnterCaption);
+//        onLaunchCamera(PicPreview);
+//    }
 
     private void onLaunchCamera(View picPreview) {
         /* create Intent to take a picture and return control to the calling application */

@@ -6,14 +6,6 @@
     android:layout_height="match_parent"
     tools:context="com.example.luzcamacho.parstagram.HomeActivity">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rvPostViewer"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentLeft="false"
-        android:layout_alignParentStart="false"
-        android:layout_alignParentTop="false" />
-
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/bottom_navigation"
         app:itemBackground="@android:color/white"
@@ -23,7 +15,14 @@
         android:layout_alignParentStart="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:menu="@menu/camera"
-        android:layout_alignParentLeft="true"
-        />
+        android:layout_alignParentLeft="true" />
+
+    <FrameLayout
+        android:id="@+id/BigFrameBoi"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/bottom_navigation">
+
+    </FrameLayout>
 
 </RelativeLayout>
