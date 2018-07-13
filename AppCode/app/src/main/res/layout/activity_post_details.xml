@@ -20,9 +20,9 @@
         android:id="@+id/tvDetailsDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_above="@+id/tvDetailsCaption"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/ivDetailsPic"
         android:text="TextView" />
 
     <TextView
@@ -32,8 +32,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/ivDetailsPic"
-        android:layout_toLeftOf="@+id/tvDetailsDate"
-        android:layout_toStartOf="@+id/tvDetailsDate"
+        android:layout_marginTop="39dp"
         android:text="TextView" />
 
     <TextView
@@ -46,4 +45,46 @@
         android:layout_alignParentStart="true"
         android:layout_below="@+id/tvDetailsUsername"
         android:text="TextView" />
+
+    <ImageView
+        android:id="@+id/iconDetailsLike"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/ivDetailsPic"
+        android:layout_marginLeft="12dp"
+        android:layout_marginStart="12dp"
+        app:srcCompat="@drawable/ufi_heart" />
+
+    <ImageView
+        android:id="@+id/iconDetailsComment"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_below="@+id/ivDetailsPic"
+        android:layout_toEndOf="@+id/tvDetailsUsername"
+        android:layout_toRightOf="@+id/tvDetailsUsername"
+        app:srcCompat="@drawable/ufi_comment" />
+
+    <ImageView
+        android:id="@+id/iconDetailsSend"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_below="@+id/ivDetailsPic"
+        android:layout_marginLeft="12dp"
+        android:layout_marginStart="12dp"
+        android:layout_toEndOf="@+id/iconDetailsComment"
+        android:tint="#000"
+        android:layout_toRightOf="@+id/iconDetailsComment"
+        app:srcCompat="@drawable/ufi_new_direct" />
+
+    <ImageView
+        android:id="@+id/iconDetailsSave"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/ivDetailsPic"
+        android:tint="#000"
+        app:srcCompat="@drawable/ufi_save" />
 </RelativeLayout>
