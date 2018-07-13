@@ -35,17 +35,55 @@
         android:id="@+id/btSubmitPost"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="26dp"
+        android:layout_below="@+id/etEnterCaption"
+        android:layout_marginEnd="45dp"
+        android:layout_marginRight="45dp"
+        android:layout_marginTop="24dp"
+        android:layout_toLeftOf="@+id/tvOurOr"
+        android:layout_toStartOf="@+id/tvOurOr"
         android:background="@drawable/other_icon" />
 
     <TextView
         android:id="@+id/tvHint"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_alignEnd="@+id/btSubmitPost"
+        android:layout_alignLeft="@+id/btSubmitPost"
+        android:layout_alignRight="@+id/btSubmitPost"
+        android:layout_alignStart="@+id/btSubmitPost"
+        android:layout_below="@+id/btSubmitPost"
+        android:text="Submit!" />
+
+    <TextView
+        android:id="@+id/tvOurOr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/tvHint"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="11dp"
-        android:text="Submit!" />
+        android:text="Or"
+        android:textSize="18sp" />
+
+    <ImageButton
+        android:id="@+id/btSetProfilePic"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_above="@+id/tvSetProfile"
+        android:layout_alignTop="@+id/btSubmitPost"
+        android:layout_marginLeft="46dp"
+        android:layout_marginStart="46dp"
+        android:layout_toEndOf="@+id/tvOurOr"
+        android:layout_toRightOf="@+id/tvOurOr"
+        android:background="#fff"
+        android:src="@drawable/profile" />
+
+    <TextView
+        android:id="@+id/tvSetProfile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/btSetProfilePic"
+        android:layout_alignStart="@+id/btSetProfilePic"
+        android:layout_below="@+id/tvOurOr"
+        android:text="Set Profile" />
+
 </RelativeLayout>

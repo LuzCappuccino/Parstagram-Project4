@@ -20,6 +20,7 @@ public class HomeActivity extends AppCompatActivity {
 
     final Fragment fragmentCamera = new CameraLaunchFragment();
     final Fragment fragmentFeed = new LoadFeedFragment();
+    final Fragment fragmentProfile = new ProfileFragment();
     public FragmentManager fragmentManager;
 
     @Override
@@ -50,6 +51,10 @@ public class HomeActivity extends AppCompatActivity {
                         Log.d(tag, "Clicked on logout");
                         onClickLogout();
                         return true;
+                    case R.id.btProfile:
+                        Log.d(tag, "Clicked on profile");
+                        FragmentTransaction fragmentTransaction3 = fragmentManager.beginTransaction();
+                        fragmentTransaction3.replace(R.id.BigFrameBoi, fragmentProfile).commit();
                 }
                 return false;
             }
@@ -84,6 +89,11 @@ public class HomeActivity extends AppCompatActivity {
     public void switchToFeed(){
         FragmentTransaction fragmentTransaction2 = fragmentManager.beginTransaction();
         fragmentTransaction2.replace(R.id.BigFrameBoi, fragmentFeed).commit();
+    }
+
+    public void switchToProfile() {
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.BigFrameBoi, fragmentProfile).commit();
     }
 //
 //    public void onClickCamera(MenuItem item) {

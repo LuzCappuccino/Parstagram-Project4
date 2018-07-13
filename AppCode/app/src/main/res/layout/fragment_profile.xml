@@ -1,0 +1,38 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.luzcamacho.parstagram.ProfileFragment">
+
+
+    <ImageView
+        android:id="@+id/ivActualProfilePic"
+        android:layout_width="125dp"
+        android:layout_height="125dp"
+        android:padding="10dp"
+        android:src="@android:color/darker_gray" />
+
+    <TextView
+        android:id="@+id/tvProfileUsername"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_toEndOf="@+id/ivActualProfilePic"
+        android:layout_toRightOf="@+id/ivActualProfilePic"
+        android:padding="10dp"
+        android:text="Username"
+        android:textAlignment="center"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/tvProfileHandle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvProfileUsername"
+        android:layout_toEndOf="@+id/ivActualProfilePic"
+        android:layout_toRightOf="@+id/ivActualProfilePic"
+        android:padding="10dp"
+        android:text="Handle"
+        android:textAlignment="center" />
+</RelativeLayout>

@@ -18,7 +18,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.luzcamacho.parstagram.model.Post;
 import com.parse.ParseException;
@@ -43,6 +45,7 @@ public class CameraLaunchFragment extends Fragment {
     /* loading views */
     public Button btSubmitPost;
     public EditText etEnterCaption;
+    public ImageButton btSetProfile;
     /* used as our context    n l,ll,e*/
     private HomeActivity fragAct;
 
@@ -58,6 +61,7 @@ public class CameraLaunchFragment extends Fragment {
         View PicPreview = fragAct.findViewById(R.id.BigFragView);
         btSubmitPost = fragAct.findViewById(R.id.btSubmitPost);
         etEnterCaption = fragAct.findViewById(R.id.etEnterCaption);
+        btSetProfile = fragAct.findViewById(R.id.btSetProfilePic);
         onLaunchCamera(PicPreview);
         /* setting on click listener */
         btSubmitPost.setOnClickListener(new View.OnClickListener() {
@@ -67,6 +71,13 @@ public class CameraLaunchFragment extends Fragment {
             }
 
         });
+        btSetProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setProfilePic();
+            }
+        });
+
     }
 
     private void onLaunchCamera(View picPreview) {
@@ -158,6 +169,38 @@ public class CameraLaunchFragment extends Fragment {
                     });
                 } else{
                     /* if the image fails to encode */
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+
+    private void setProfilePic() {
+        Log.d(APP_TAG, "Changing our profile pic");
+        final ParseFile file = new ParseFile(getPhotoFileUri(photoFileName));
+        final ParseUser user = ParseUser.getCurrentUser();
+
+        file.saveInBackground(new SaveCallback() {
+            @Override
+            public void done(ParseException e) {
+                if(e == null){
+                    user.put("ProfilePic", file);
+                    user.saveInBackground(new SaveCallback() {
+                        @Override
+                        public void done(ParseException e) {
+                            if(e == null){
+                                Toast.makeText(fragAct, "Profile pic updated", Toast.LENGTH_LONG).show();
+                                fragAct.switchToProfile();
+                            }
+                            else{
+                                Log.d(APP_TAG, "User has been updated");
+                            }
+                        }
+                    });
+                }
+                else{
+                    Log.d(APP_TAG, "Failed to save profile pic");
                     e.printStackTrace();
                 }
             }

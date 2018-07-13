@@ -1,16 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <item
-        android:id="@+id/btCamera"
-        android:title="camera"
-        app:showAsAction="always" />
+
     <item
         android:id="@+id/btLogOut"
         android:title="logout"
+        android:icon="@drawable/signout"
         app:showAsAction="always" />
 
+    <item
+        android:id="@+id/btCamera"
+        android:title="camera"
+        android:icon="@drawable/instagram_new_post_filled_24"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/btProfile"
+        android:title="Profile"
+        app:showAsAction="always"
+        android:icon="@drawable/instagram_user_filled_24" />
+
+
     <item android:id="@+id/btFeed"
+        android:icon="@drawable/instagram_home_filled_24"
         android:title="Feed"
         app:showAsAction="always" />
 
