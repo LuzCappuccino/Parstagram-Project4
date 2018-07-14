@@ -10,8 +10,8 @@
 
     <EditText
         android:id="@+id/etSetUsername"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="301dp"
+        android:layout_height="55dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
@@ -22,12 +22,14 @@
         android:hint="Username"
         android:inputType="textMultiLine"
         android:textAlignment="center"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/background_textbox"
         android:textColor="#ffff" />
 
     <EditText
         android:id="@+id/etSetHandle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="301dp"
+        android:layout_height="55dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
@@ -37,12 +39,14 @@
         android:hint="Handle"
         android:textColor="#ffff"
         android:inputType="textMultiLine"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/background_textbox"
         android:textAlignment="center" />
 
     <EditText
         android:id="@+id/etSetEmail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="301dp"
+        android:layout_height="55dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
@@ -52,12 +56,14 @@
         android:textColor="#ffff"
         android:hint="Email"
         android:inputType="textMultiLine"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/background_textbox"
         android:textAlignment="center" />
 
     <EditText
         android:id="@+id/etSetPassword"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="301dp"
+        android:layout_height="55dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
@@ -67,12 +73,14 @@
         android:hint="Password"
         android:textColor="#ffff"
         android:inputType="textMultiLine"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/background_textbox"
         android:textAlignment="center" />
 
     <Button
         android:id="@+id/btSignUp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="301dp"
+        android:layout_height="55dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentLeft="true"
