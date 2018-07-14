@@ -32,7 +32,7 @@
         android:layout_below="@+id/tvProfileUsername"
         android:layout_toEndOf="@+id/ivActualProfilePic"
         android:layout_toRightOf="@+id/ivActualProfilePic"
-        android:padding="10dp"
+        android:padding="2dp"
         android:text="Handle"
         android:textAlignment="center" />
 </RelativeLayout>

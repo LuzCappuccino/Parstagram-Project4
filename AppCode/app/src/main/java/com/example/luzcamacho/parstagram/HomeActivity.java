@@ -20,7 +20,7 @@ public class HomeActivity extends AppCompatActivity {
 
     final Fragment fragmentCamera = new CameraLaunchFragment();
     final Fragment fragmentFeed = new LoadFeedFragment();
-    final Fragment fragmentProfile = new ProfileFragment();
+    final ProfileFragment fragmentProfile = new ProfileFragment();
     public FragmentManager fragmentManager;
 
     @Override
@@ -53,6 +53,7 @@ public class HomeActivity extends AppCompatActivity {
                         return true;
                     case R.id.btProfile:
                         Log.d(tag, "Clicked on profile");
+                        fragmentProfile.setParseUser(null);
                         FragmentTransaction fragmentTransaction3 = fragmentManager.beginTransaction();
                         fragmentTransaction3.replace(R.id.BigFrameBoi, fragmentProfile).commit();
                 }
@@ -94,6 +95,13 @@ public class HomeActivity extends AppCompatActivity {
     public void switchToProfile() {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.BigFrameBoi, fragmentProfile).commit();
+    }
+
+    public void clickedProfileSwitch(ParseUser clickedUser) {
+        ProfileFragment newClickedUser = new ProfileFragment();
+        newClickedUser.setParseUser(clickedUser);
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.BigFrameBoi, newClickedUser).commit();
     }
 //
 //    public void onClickCamera(MenuItem item) {

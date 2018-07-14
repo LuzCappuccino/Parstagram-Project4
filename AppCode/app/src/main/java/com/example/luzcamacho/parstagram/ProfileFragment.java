@@ -11,8 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.bumptech.glide.load.resource.bitmap.CircleCrop;
 import com.example.luzcamacho.parstagram.model.GlideApp;
 import com.parse.ParseUser;
 
@@ -26,6 +26,7 @@ public class ProfileFragment extends Fragment {
     public TextView tvProfileHandle;
     /* act as our kinda context */
     private FragmentActivity fragAct;
+    private ParseUser finalUser = null;
 
     public ProfileFragment() {
         // Required empty public constructor
@@ -41,14 +42,15 @@ public class ProfileFragment extends Fragment {
         ivProfilePic = fragAct.findViewById(R.id.ivActualProfilePic);
         tvProfileUsername = fragAct.findViewById(R.id.tvProfileUsername);
         tvProfileHandle = fragAct.findViewById(R.id.tvProfileHandle);
-
-        Toast.makeText(fragAct, "Launching Profile Fragment", Toast.LENGTH_LONG).show();
-        populateProfile();
+        if(finalUser == null) finalUser = ParseUser.getCurrentUser();
+        populateProfile(finalUser);
     }
 
-    private void populateProfile() {
-        ParseUser user = ParseUser.getCurrentUser();
-        String profilePicUrl = user.getParseFile("ProfilePic").getUrl();
+    public void populateProfile(ParseUser user) {
+        String profilePicUrl = "";
+        if(user.getParseFile("ProfilePic") != null){
+            profilePicUrl = user.getParseFile("ProfilePic").getUrl();
+        }
         String Username = user.getUsername();
         String Handle = user.getString("handle");
 
@@ -57,8 +59,13 @@ public class ProfileFragment extends Fragment {
 
         GlideApp.with(fragAct)
                 .load(profilePicUrl)
+                .transform(new CircleCrop())
                 .into(ivProfilePic);
 
+    }
+
+    public void setParseUser(ParseUser user){
+        this.finalUser = user;
     }
 
     @Override

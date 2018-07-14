@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.load.resource.bitmap.CircleCrop;
 import com.example.luzcamacho.parstagram.model.GlideApp;
 import com.example.luzcamacho.parstagram.model.Post;
 
@@ -25,9 +26,11 @@ public class InstaAdapter extends RecyclerView.Adapter<InstaAdapter.ViewHolder> 
 
     private static ArrayList<Post> myFeed;
     static Context context;
+    private HomeActivity myRights;
 
-    public InstaAdapter(ArrayList<Post> myList) {
+    public InstaAdapter(ArrayList<Post> myList, HomeActivity myRights) {
         this.myFeed = myList;
+        this.myRights = myRights;
     }
 
     @NonNull
@@ -47,13 +50,24 @@ public class InstaAdapter extends RecyclerView.Adapter<InstaAdapter.ViewHolder> 
         /* set in the holder */
         /* double check this cast */
         String photoURL = currPost.getImage().getUrl();
-        holder.Username.setText(currPost.getUser().getUsername());
+        String profilePicUrl = "";
+        if(currPost.getUser().getParseFile("ProfilePic") != null){
+            profilePicUrl = currPost.getUser().getParseFile("ProfilePic").getUrl();
+        }
+
+        String missingAt = currPost.getUser().getString("handle");
+        String actualUsername = currPost.getUser().getUsername();
+        holder.Username.setText("@" + missingAt);
         holder.Caption.setText(currPost.getDescription());
         holder.Date.setText(currPost.getDate());
-        // TODO: work with the image later
         GlideApp.with(context)
                 .load(photoURL)
                 .into(holder.Pic);
+        GlideApp.with(context)
+                .load(profilePicUrl)
+                .transform(new CircleCrop())
+                .into(holder.ProfilePic);
+        holder.ActualUsername.setText(actualUsername);
     }
 
     @Override
@@ -76,6 +90,8 @@ public class InstaAdapter extends RecyclerView.Adapter<InstaAdapter.ViewHolder> 
         public TextView Username;
         public TextView Caption;
         public TextView Date;
+        public TextView ActualUsername;
+        public ImageView ProfilePic;
 
         public ViewHolder(View itemView) {
             /* viewholder thaaaannnggss */
@@ -84,8 +100,26 @@ public class InstaAdapter extends RecyclerView.Adapter<InstaAdapter.ViewHolder> 
             Username = itemView.findViewById(R.id.tvUserInfo);
             Caption = itemView.findViewById(R.id.tvCaption);
             Date = itemView.findViewById(R.id.tvDate);
+            ActualUsername = itemView.findViewById(R.id.tvActuallyUsername);
+            ProfilePic = itemView.findViewById(R.id.ivTimeProfilePic);
 
             itemView.setOnClickListener(this);
+
+            ProfilePic.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    doThings();
+                }
+            });
+        }
+
+        private void doThings() {
+            int position = getAdapterPosition();
+            if(position != RecyclerView.NO_POSITION){
+                Post post = myFeed.get(position);
+                /* init the new intent */
+                myRights.clickedProfileSwitch(post.getUser());
+            }
         }
 
         @Override
@@ -100,6 +134,8 @@ public class InstaAdapter extends RecyclerView.Adapter<InstaAdapter.ViewHolder> 
                 context.startActivity(intent);
             }
         }
+
+
     }
 
 

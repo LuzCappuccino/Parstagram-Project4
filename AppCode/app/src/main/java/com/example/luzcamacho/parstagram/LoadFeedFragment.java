@@ -49,7 +49,7 @@ public class LoadFeedFragment extends Fragment {
         /* init data set */
         myFeed = new ArrayList<>();
         /* construct adapter with data set */
-        instaAdapter = new InstaAdapter(myFeed);
+        instaAdapter = new InstaAdapter(myFeed, (HomeActivity) getActivity());
         /* recycler view set up (layout manager) */
         rvPostViewer.setLayoutManager(new LinearLayoutManager(fragAct));
         /* set the adapter */
